@@ -1,8 +1,8 @@
-package com.epam.dao;
+package com.epam.application.dao;
 
-import com.epam.dao.exception.DaoException;
+import com.epam.application.bean.Account;
+import com.epam.application.dao.exception.DaoException;
 
-import javax.naming.NamingException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,8 +10,10 @@ import java.sql.Statement;
 
 public class AccountDAO extends Dao {
 
-    public void createAccount(String login, String password) throws DaoException {
+    public void addAccount(Account account) throws DaoException {
 
+        String login = account.getLogin();
+        String password = account.getPassword();
         String query = "INSERT TABLE accounts VALUES('" + login + "','" + password + "');";
         Connection connection = null;
         Statement statement = null;
@@ -24,25 +26,24 @@ public class AccountDAO extends Dao {
         }
         catch (SQLException e) {
 
-            throw new DaoException();
+            throw new DaoException(e);
         }
         catch (ClassNotFoundException e) {
 
-            throw new DaoException();
-        }
-        catch (NamingException e) {
-
-            throw new DaoException();
+            throw new DaoException(e);
         }
 
     }
 
-    public String getLogin(String login) {
+    public Account getAccount(String log) throws DaoException {
 
-        String query = "SELECT login FROM accounts WHERE login = '" + login + "';";
+        String query = "SELECT login,password FROM accounts WHERE login = '" + log + "';";
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
+        String login = null;
+        String password = null;
+        Account account = null;
 
         try {
 
@@ -53,33 +54,35 @@ public class AccountDAO extends Dao {
             while (resultSet.next()) {
 
                 login = resultSet.getString("login");
+                password = resultSet.getString("password");
+            }
+
+            if (login != null) {
+
+                account = new Account();
+                account.setLogin(login);
+                account.setPassword(password);
             }
 
         } catch (SQLException e) {
 
-            e.printStackTrace();
+            throw new DaoException(e);
         }
         catch (ClassNotFoundException e) {
 
-            e.printStackTrace();
-        }
-        catch (NamingException e) {
-
-            e.printStackTrace();
+            throw new DaoException(e.getMessage(),e);
         }
         finally {
 
             try {
 
-                connection.close();
+                if (connection != null) {
+                    connection.close();
+                }
             }
             catch (SQLException e) {}
         }
 
-        return login;
-    }
-    public String getPassword(String login) {
-
-        return null;
+        return account;
     }
 }

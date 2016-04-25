@@ -1,4 +1,4 @@
-package com.epam.command;
+package com.epam.application.command;
 
 
 import java.util.HashMap;
@@ -10,8 +10,10 @@ public class CommandFactory {
 
     public CommandFactory() {
 
-        commands = new HashMap<String, Command>();
+        commands = new HashMap<String, Command>(3);
         commands.put("authorization",new LoginValidationCommand());
+        commands.put("logout",new LogOutCommand());
+        commands.put("localization",new LocalizationCommand());
     }
 
     public Command getCommand(String command) {
