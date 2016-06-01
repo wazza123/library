@@ -14,14 +14,16 @@ import java.io.IOException;
 
 public class Controller extends HttpServlet {
 
+    final Logger LOGGER = Logger.getRootLogger();
+    final String COMMAND_PARAMETER_NAME = "command";
+    final String LAST_PAGE_ATTRIBUTE_NAME = "page";
+    final String ERROR_PAGE = "WEB-INF/errorPage.jsp";
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        final Logger LOGGER = Logger.getRootLogger();
-        final String LAST_PAGE_ATTRIBUTE_NAME = "page";
-
-        String commandType = req.getParameter("command");
-        CommandFactory commandFactory = new CommandFactory();
+        String commandType = req.getParameter(COMMAND_PARAMETER_NAME);
+        CommandFactory commandFactory = CommandFactory.getFactory();
         Command command = commandFactory.getCommand(commandType);
         String page = null;
 
@@ -31,7 +33,8 @@ public class Controller extends HttpServlet {
         }
         catch (CommandException e) {
 
-            LOGGER.error(e.getMessage(), e);
+            LOGGER.error("exception occur",e);
+            page = ERROR_PAGE;
         }
 
         req.getSession(true).setAttribute(LAST_PAGE_ATTRIBUTE_NAME,page);

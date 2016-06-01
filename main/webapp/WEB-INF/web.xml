@@ -5,14 +5,6 @@
          version="3.1">
 
 
-<filter>
-    <filter-name>filter</filter-name>
-    <filter-class>com.epam.application.controller.AuthorizationFilter</filter-class>
-</filter>
-    <filter-mapping>
-        <filter-name>filter</filter-name>
-        <url-pattern>/index.jsp</url-pattern>
-    </filter-mapping>
 
     <servlet>
         <servlet-name>controller</servlet-name>
