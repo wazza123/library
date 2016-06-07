@@ -37,7 +37,6 @@ public class Controller extends HttpServlet {
             page = ERROR_PAGE;
         }
 
-        req.getSession(true).setAttribute(LAST_PAGE_ATTRIBUTE_NAME,page);
         req.getRequestDispatcher(page).forward(req,resp);
     }
 }

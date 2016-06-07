@@ -5,7 +5,13 @@
          version="3.1">
 
 
-
+    <context-param>
+        <description>Location to store uploaded file</description>
+        <param-name>file-upload</param-name>
+        <param-value>
+            D:\\e\
+        </param-value>
+    </context-param>
     <servlet>
         <servlet-name>controller</servlet-name>
         <servlet-class>com.epam.application.controller.Controller</servlet-class>
@@ -15,4 +21,12 @@
         <url-pattern>/controller</url-pattern>
     </servlet-mapping>
 
+    <filter>
+        <filter-name>filter</filter-name>
+        <filter-class>com.epam.application.controller.AuthorizationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>filter</filter-name>
+        <url-pattern>/index.jsp</url-pattern>
+    </filter-mapping>
 </web-app>

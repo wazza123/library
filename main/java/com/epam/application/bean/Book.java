@@ -8,8 +8,8 @@ public class Book {
     private String genre;
     private Writer author;
     private String annotation;
-    private String publisher;
     private String bookFilePath;
+    private String bookCoverPath;
 
     public int getId() {
 
@@ -56,19 +56,19 @@ public class Book {
         return annotation;
     }
 
-    public String getPublisher() {
-
-        return publisher;
-    }
-
-    public void setPublisher(String publisher) {
-
-        this.publisher = publisher;
-    }
-
     public String getBookFilePath() {
 
         return bookFilePath;
+    }
+
+    public String getBookCoverPath() {
+
+        return bookCoverPath;
+    }
+
+    public void setBookCoverPath(String bookCoverPath) {
+
+        this.bookCoverPath = bookCoverPath;
     }
 
     public void setBookFilePath(String bookFilePath) {
@@ -128,4 +128,5 @@ public class Book {
 
         return true;
     }
+
 }

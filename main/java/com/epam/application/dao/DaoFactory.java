@@ -12,6 +12,7 @@ public class DaoFactory {
     private DaoFactory() {
 
         daoType = new HashMap<DaoType, Dao>(2);
+        daoType.put(DaoType.DB_ACCOUNT_DAO, new DbAccountDao());
         daoType.put(DaoType.DB_BOOk_DAO, new DbBookDao());
     }
 

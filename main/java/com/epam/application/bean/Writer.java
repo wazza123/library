@@ -6,6 +6,8 @@ public class Writer {
     private int id;
     private String firstName;
     private String lastName;
+    private String biography;
+
 
     public int getId() {
 
@@ -35,6 +37,16 @@ public class Writer {
     public void setLastName(String lastName) {
 
         this.lastName = lastName;
+    }
+
+    public String getBiography() {
+
+        return biography;
+    }
+
+    public void setBiography(String biography) {
+
+        this.biography = biography;
     }
 
     @Override

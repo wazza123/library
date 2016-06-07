@@ -1,14 +1,19 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.epam.application.bean.Book" %>
+<%@ page session="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<html>
   <head>
     <title></title>
     <style><%@include file="WEB-INF/styles/mainPageStyle.css"%></style>
   </head>
 
+<body>
+<h2><a href="index.jsp">main page</a>  </h2>
+<h2><a href="authorization.jsp" >sign in</a>  </h2>
 
 <div >
 <form action="controller" method="post">

@@ -14,5 +14,11 @@ public interface BookDAO extends Dao {
 
     public List<Book> getBooksByGenre(String genre) throws DaoException;
 
+    public List<Book> getBooksByAuthor(String author);
+
     public List<Book> getAllBooks() throws DaoException;
+
+    public void addBook(Book book) throws DaoException;
+
+    public void deleteBook(int BookId) throws DaoException;
 }

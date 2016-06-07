@@ -25,11 +25,8 @@ public class DbBookDao implements BookDAO {
 
     public Book getBookById(int id) throws DaoException {
 
-        String query = "SELECT books.book_id,book_name,genre,publisher,annotation,book_file_path,first_name,last_name " +
-                "FROM booklibrary.books INNER JOIN booklibrary.writers " +
-                "INNER JOIN booklibrary.books_and_authors " +
-                "ON writers.writer_id = books_and_authors.writer_id AND books.book_id = books_and_authors.book_id " +
-                "where books.book_id = ?;";
+        String query = "SELECT book_id,book_name,genre,annotation,book_file_path,cover_img_file_path,author " +
+                "FROM bookstemp where book_id = ?;";
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -49,13 +46,15 @@ public class DbBookDao implements BookDAO {
 
                     book = new Book();
                     writer = new Writer();
-                    book.setId(resultSet.getInt("books.book_id"));
+                    book.setId(resultSet.getInt("book_id"));
                     book.setName(resultSet.getString("book_name"));
-                    writer.setFirstName(resultSet.getString("first_name"));
-                    writer.setLastName(resultSet.getString("last_name"));
+                    writer.setFirstName(resultSet.getString("author"));
+                    writer.setLastName("");
                     book.setAuthor(writer);
                     book.setGenre(resultSet.getString("genre"));
                     book.setAnnotation(resultSet.getString("annotation"));
+                    book.setBookFilePath(resultSet.getString("book_file_path"));
+                    book.setBookCoverPath(resultSet.getString("cover_img_file_path"));
                 }
             }
         }
@@ -118,10 +117,8 @@ public class DbBookDao implements BookDAO {
 
     public List<Book> getBooksByName(String name) throws DaoException {
 
-        String query = "SELECT books.book_id,book_name,genre,publisher,annotation,book_file_path,first_name,last_name " +
-                "FROM booklibrary.books INNER JOIN booklibrary.writers " +
-                "INNER JOIN booklibrary.books_and_authors " +
-                "ON writers.writer_id = books_and_authors.writer_id AND books.book_id = books_and_authors.book_id " +
+        String query = "SELECT book_id,book_name,genre,annotation,book_file_path,cover_img_file_path,author " +
+                "FROM booklibrary.bookstemp " +
                 "where book_name LIKE ?;";
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -143,10 +140,10 @@ public class DbBookDao implements BookDAO {
 
                     book = new Book();
                     writer = new Writer();
-                    book.setId(resultSet.getInt("books.book_id"));
+                    book.setId(resultSet.getInt("book_id"));
                     book.setName(resultSet.getString("book_name"));
-                    writer.setFirstName(resultSet.getString("first_name"));
-                    writer.setLastName(resultSet.getString("last_name"));
+                    writer.setFirstName(resultSet.getString("author"));
+                    writer.setLastName("");
                     book.setAuthor(writer);
                     book.setGenre(resultSet.getString("genre"));
                     book.setAnnotation(resultSet.getString("annotation"));
@@ -214,10 +211,8 @@ public class DbBookDao implements BookDAO {
 
     public List<Book> getBooksByGenre(String genre) throws DaoException {
 
-        String query ="SELECT books.book_id,book_name,genre,publisher,annotation,book_file_path,first_name,last_name\n" +
-                "FROM booklibrary.books INNER JOIN booklibrary.writers \n" +
-                "INNER JOIN booklibrary.books_and_authors \n" +
-                "ON writers.writer_id = books_and_authors.writer_id AND books.book_id = books_and_authors.book_id\n" +
+        String query ="SELECT bookstemp.book_id,book_name,genre,annotation,book_file_path,author,cover_img_file_path\n" +
+                "FROM bookstemp " +
                 "where genre = ?;";
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -239,13 +234,15 @@ public class DbBookDao implements BookDAO {
 
                     book = new Book();
                     writer = new Writer();
-                    book.setId(resultSet.getInt("books.book_id"));
+                    book.setId(resultSet.getInt("book_id"));
                     book.setName(resultSet.getString("book_name"));
-                    writer.setFirstName(resultSet.getString("first_name"));
-                    writer.setLastName(resultSet.getString("last_name"));
+                    writer.setFirstName(resultSet.getString("author"));
+                    writer.setLastName("");
                     book.setAuthor(writer);
                     book.setGenre(resultSet.getString("genre"));
                     book.setAnnotation(resultSet.getString("annotation"));
+                    book.setBookFilePath(resultSet.getString("book_file_path"));
+                    book.setBookCoverPath(resultSet.getString("cover_img_file_path"));
                 }
 
                 books.add(book);
@@ -314,10 +311,8 @@ public class DbBookDao implements BookDAO {
 
     public List<Book> getAllBooks() throws DaoException {
 
-        String query ="SELECT books.book_id,book_name,genre,publisher,annotation,book_file_path,first_name,last_name " +
-                "FROM booklibrary.books INNER JOIN booklibrary.writers " +
-                "INNER JOIN booklibrary.books_and_authors " +
-                "ON writers.writer_id = books_and_authors.writer_id AND books.book_id = books_and_authors.book_id;";
+        String query ="SELECT book_id,book_name,genre,annotation,book_file_path,cover_img_file_path,author " +
+                "FROM booklibrary.bookstemp;";
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -337,13 +332,15 @@ public class DbBookDao implements BookDAO {
 
                     book = new Book();
                     writer = new Writer();
-                    book.setId(resultSet.getInt("books.book_id"));
+                    book.setId(resultSet.getInt("book_id"));
                     book.setName(resultSet.getString("book_name"));
-                    writer.setFirstName(resultSet.getString("first_name"));
-                    writer.setLastName(resultSet.getString("last_name"));
+                    writer.setFirstName(resultSet.getString("author"));
+                    writer.setLastName("");
                     book.setAuthor(writer);
                     book.setGenre(resultSet.getString("genre"));
                     book.setAnnotation(resultSet.getString("annotation"));
+                    book.setBookFilePath(resultSet.getString("book_file_path"));
+                    book.setBookCoverPath(resultSet.getString("cover_img_file_path"));
                 }
 
                 books.add(book);
@@ -404,5 +401,138 @@ public class DbBookDao implements BookDAO {
         }
 
         return books;
+    }
+
+    public void addBook(Book book) throws DaoException {
+
+        String query ="INSERT INTO bookstemp (book_name,author,genre,annotation)" +
+                "  VALUES(?,?,?,?);";
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+
+            connection = DbPool.getConnection();
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,book.getName());
+            preparedStatement.setString(2,book.getAuthor().toString());
+            preparedStatement.setString(3,book.getGenre());
+            preparedStatement.setString(4,book.getAnnotation());
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+
+            LOGGER.error(e);
+            throw new DaoException(e);
+        }
+        catch (PoolNotInitException e) {
+
+            throw new DaoException(e);
+        }
+        catch (PoolConnectionException e) {
+
+            throw new DaoException(e);
+        }
+        catch (PropertyNotSetException e) {
+
+            throw new DaoException(e);
+        }
+        catch (InitPoolException e) {
+
+            throw new DaoException(e);
+        }
+        catch (IOException e) {
+
+            throw new DaoException(e);
+        }
+        finally {
+
+            try {
+
+                if (preparedStatement != null) {
+
+                    preparedStatement.close();
+                }
+
+                if (connection != null) {
+
+                    DbPool.returnConnection(connection);
+                }
+            }
+            catch (SQLException e) {
+
+                LOGGER.error("fail to close connection", e);
+            }
+            catch (PoolConnectionException e) {
+
+                LOGGER.error("fail to return connection to pool",e);
+            }
+        }
+    }
+
+    public void deleteBook(int bookId) throws DaoException {
+
+        String query ="DELETE FROM bookstemp WHERE book_id = " + bookId + ";";
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+
+            connection = DbPool.getConnection();
+            preparedStatement = connection.prepareStatement(query);
+            //preparedStatement.setInt(1,bookId);
+            preparedStatement.executeUpdate(query);
+
+        } catch (SQLException e) {
+
+            LOGGER.error(e);
+            throw new DaoException(e);
+        }
+        catch (PoolNotInitException e) {
+
+            throw new DaoException(e);
+        }
+        catch (PoolConnectionException e) {
+
+            throw new DaoException(e);
+        }
+        catch (PropertyNotSetException e) {
+
+            throw new DaoException(e);
+        }
+        catch (InitPoolException e) {
+
+            throw new DaoException(e);
+        }
+        catch (IOException e) {
+
+            throw new DaoException(e);
+        }
+        finally {
+
+            try {
+
+                if (preparedStatement != null) {
+
+                    preparedStatement.close();
+                }
+
+                if (connection != null) {
+
+                    DbPool.returnConnection(connection);
+                }
+            }
+            catch (SQLException e) {
+
+                LOGGER.error("fail to close connection", e);
+            }
+            catch (PoolConnectionException e) {
+
+                LOGGER.error("fail to return connection to pool",e);
+            }
+        }
+
     }
 }

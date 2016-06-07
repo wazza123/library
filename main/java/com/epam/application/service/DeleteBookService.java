@@ -6,18 +6,18 @@ import com.epam.application.dao.DaoFactory;
 import com.epam.application.dao.exception.DaoException;
 import com.epam.application.service.exception.ServiceException;
 
-public class FindBookService implements Service {
-
+public class DeleteBookService implements Service {
 
     public Object getInformation(Object... params) throws ServiceException {
 
-        String bookNaMe = (String) params[0];
+        int bookId = Integer.valueOf((String) params[0]);
         DaoFactory daoFactory = DaoFactory.getDaoFactory();
         BookDAO bookDAO = (BookDAO) daoFactory.getDao(DaoFactory.DaoType.DB_BOOk_DAO);
 
         try {
 
-           return bookDAO.getBooksByName(bookNaMe);
+            bookDAO.deleteBook(bookId);
+            return true;
         }
         catch (DaoException e) {
 

@@ -1,33 +1,56 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ page session="false" %>
 <html>
 <head>
     <title></title>
-    <fmt:setLocale value="${sessionScope.locale}"  />
-    <fmt:setBundle basename="localization.local" var="loc" />
-    <fmt:message bundle="${loc}" key="local.message" var="message" />
-    <fmt:message bundle="${loc}" key="local.locbutton.name.ru" var="ru_button" />
-    <fmt:message bundle="${loc}" key="local.locbutton.name.en" var="en_button" />
-    <fmt:message bundle="${loc}" key="local.logoutbutton.name" var="logout_button" />
+    <style><%@include file="styles/mainPageStyle.css"%></style>
 </head>
+
 <body>
-
+<h2><a href="index.jsp">main page</a>  </h2>
 <form action="controller" method="post">
-    <input type="hidden" name="command" value="localization" />
-    <input type="hidden" name="local" value="ru" />
-    <input type="submit" value="${ru_button}" /><br />
-</form>
-<form action="controller" method="post">
-    <input type="hidden" name="command" value="localization" />
-    <input type="hidden" name="local" value="en" />
-    <input type="submit" value="${en_button}" /><br />
+    <input type="hidden" name="command" value="logout"/>
+    <input type="submit" value="sign out">
 </form>
 
-${message}
-<form action="controller" method="post">
-<input type="hidden" name="command" value="logout">
-<input type="submit" value="${logout_button}"> <br>
+<div >
+    <form action="controller" method="post">
+        <input type="hidden" name="command" value="find_book" />
+        <input class="text-area" type="text" name="book_title">
+        <input type="submit" value="find book"/>
+    </form>
+</div>
 
-</form>
+<div class="genres">
+    <form action="controller" method="post">
+        <input type="hidden" name="command" value="book_list" />
+        <input type="hidden" name="book_type" value="all" />
+        <input type="submit" value="All books"/>
+    </form>
+    <form action="controller" method="post">
+        <input type="hidden" name="command" value="book_list" />
+        <input type="hidden" name="book_type" value="Biography" />
+        <input type="submit" value="Biography"/>
+    </form>
+    <form action="controller" method="post">
+        <input type="hidden" name="command" value="book_list" />
+        <input type="hidden" name="book_type" value="other" />
+        <input type="submit" value="Other"/>
+    </form>
+    <form action="controller" method="post">
+        <input type="hidden" name="command" value="book_list" />
+        <input type="hidden" name="book_type" value="other" />
+        <input type="submit" value="Other"/>
+    </form>
+
+    <form action="controller" method="post">
+        <input type="hidden" name="command" value="book_list" />
+        <input type="hidden" name="book_type" value="other" />
+        <input type="submit" value="Other"/>
+    </form>
+
+</div>
+
 </body>
 </html>

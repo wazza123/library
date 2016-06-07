@@ -12,8 +12,14 @@ public class CommandFactory {
     private CommandFactory() {
 
         commands = new HashMap<CommandType, Command>();
+        commands.put(CommandType.LOGOUT,new LogOutCommand());
         commands.put(CommandType.BOOK_LIST, new BookListCommand());
         commands.put(CommandType.BOOK_INFO, new BookInfoCommand());
+        commands.put(CommandType.FIND_BOOK, new FindBookCommand());
+        commands.put(CommandType.AUTHORIZATION, new AuthorizationCommand());
+        commands.put(CommandType.REGISTRATION, new RegistrationCommand());
+        commands.put(CommandType.DELETE_BOOK, new DeleteBookCommand());
+        commands.put(CommandType.ADD_BOOK, new AddBookCommand());
     }
 
     public static CommandFactory getFactory() {
@@ -32,5 +38,6 @@ public class CommandFactory {
     }
 
 
-    public enum CommandType{BOOK_LIST,BOOK_INFO}
+    public enum CommandType{AUTHORIZATION,LOGOUT,REGISTRATION,BOOK_LIST,BOOK_INFO,
+        FIND_BOOK,DELETE_BOOK, ADD_BOOK}
 }

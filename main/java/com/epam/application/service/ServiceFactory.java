@@ -12,9 +12,13 @@ public class ServiceFactory {
     private ServiceFactory() {
 
         services = new HashMap<ServiceType, Service>();
+        services.put(ServiceType.AUTHORIZATION, new AuthorizationService());
+        services.put(ServiceType.REGISTRATION, new RegistrationService());
         services.put(ServiceType.BOOK_LIST, new BookListService());
         services.put(ServiceType.BOOK_INFO, new BookInfoService());
         services.put(ServiceType.FIND_BOOK, new FindBookService());
+        services.put(ServiceType.DELETE_BOOK, new DeleteBookService());
+        services.put(ServiceType.ADD_BOOK, new AddBookService());
     }
 
     public static ServiceFactory getFactory() {
@@ -32,5 +36,6 @@ public class ServiceFactory {
         return services.get(ServiceType.valueOf(service.toUpperCase()));
     }
 
-    public enum ServiceType {BOOK_LIST,BOOK_INFO,FIND_BOOK};
+    public enum ServiceType {AUTHORIZATION,BOOK_LIST,REGISTRATION,BOOK_INFO,FIND_BOOK,
+        DELETE_BOOK, ADD_BOOK};
 }

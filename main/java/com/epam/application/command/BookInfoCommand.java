@@ -14,6 +14,8 @@ public class BookInfoCommand implements Command {
     private final String INFO_PAGE = "WEB-INF/info.jsp";
     private final String ERROR_PAGE = "";
     private final String BOOK_ID_ATTRIBUTE = "book_id";
+    private final String BOOK_INFO_ATTRIBUTE = "book_info";
+    private final String AUTHORIZATION_STATUS_ATTRIBUTE = "isAuthorized";
 
     public String execute(HttpServletRequest request) throws CommandException {
 
@@ -30,11 +32,19 @@ public class BookInfoCommand implements Command {
         }
         catch (ServiceException e) {
 
-            page = ERROR_PAGE;
             throw new CommandException(e);
         }
 
-        request.setAttribute("book_info",book);
+        request.setAttribute(BOOK_INFO_ATTRIBUTE,book);
+
+        if (request.getSession(false) == null) {
+
+            request.setAttribute(AUTHORIZATION_STATUS_ATTRIBUTE, false);
+        }
+        else {
+
+            request.setAttribute(AUTHORIZATION_STATUS_ATTRIBUTE,true);
+        }
         return page;
     }
 }
