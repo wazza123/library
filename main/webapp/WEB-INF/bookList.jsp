@@ -20,5 +20,8 @@
         <input class="book" type="hidden" name="book_id" value="${book.id}">
     </form>
 </c:forEach>
+<c:if test="${empty books}">
+    nothing to show
+</c:if>
 </body>
 </html>

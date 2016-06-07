@@ -51,7 +51,7 @@ public class BookListCommand implements Command {
 
             return PAGE;
         }
-        else if (userRole.equals(USER_ROLE_ATTRIBUTE)) {
+        else if (userRole.equals(USER_ROLE)) {
 
             return PAGE;
         }

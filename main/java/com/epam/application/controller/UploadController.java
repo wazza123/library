@@ -1,35 +1,27 @@
-package com.epam.application.command;
+package com.epam.application.controller;
 
 
-import com.epam.application.command.exception.CommandException;
-import com.epam.application.service.Service;
-import com.epam.application.service.ServiceFactory;
-import com.epam.application.service.exception.ServiceException;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
-
-public class AddBookCommand implements Command {
-
-    private final String PAGE = "WEB-INF/adminMainPage.jsp";
-    private final String BOOK_NAME_ATTRIBUTE = "book_name";
-    private final String AUTHOR_ATTRIBUTE = "author";
-    private final String GENRE_ATTRIBUTE = "genre";
-    private final String ANNOTATION_ATTRIBUTE = "annotation";
-    private final String BOOK_FILE_ATTRIBUTE = "book_file";
+public class UploadController extends HttpServlet {
 
     private void writeFile(HttpServletRequest request) {
 
         boolean isMultipart;
         String filePath;
-        int maxFileSize = 50 * 1024;
-        int maxMemSize = 4 * 1024;
+        int maxFileSize = 5000000 * 1024;
+        int maxMemSize = 400 * 1024;
         File file;
         //filePath = request.getServletContext().getInitParameter("file-upload");
         filePath = "D:\\erp\\";
@@ -77,30 +69,13 @@ public class AddBookCommand implements Command {
         }catch(Exception ex) {
             System.out.println(ex);
 
+        }
     }
-}
 
-    public String execute(HttpServletRequest request) throws CommandException {
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String bookName = request.getParameter(BOOK_NAME_ATTRIBUTE);
-        String author = request.getParameter(AUTHOR_ATTRIBUTE);
-        String genre = request.getParameter(GENRE_ATTRIBUTE);
-        String annotation = request.getParameter(ANNOTATION_ATTRIBUTE);
-        String bookFile = request.getParameter(BOOK_FILE_ATTRIBUTE);
-
-        ServiceFactory serviceFactory = ServiceFactory.getFactory();
-        Service service = serviceFactory.getService(ServiceFactory.ServiceType.ADD_BOOK);
-
-        try {
-
-           // writeFile(request);
-            service.getInformation(bookName,author,genre,annotation);
-        }
-        catch (ServiceException e) {
-
-            throw new CommandException(e);
-        }
-
-        return PAGE;
+        writeFile(req);
+        req.getRequestDispatcher("backPage.html").forward(req,resp);
     }
 }

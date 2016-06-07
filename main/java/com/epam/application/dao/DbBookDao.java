@@ -405,8 +405,8 @@ public class DbBookDao implements BookDAO {
 
     public void addBook(Book book) throws DaoException {
 
-        String query ="INSERT INTO bookstemp (book_name,author,genre,annotation)" +
-                "  VALUES(?,?,?,?);";
+        String query ="INSERT INTO bookstemp (book_name,author,genre,annotation,book_file_path)" +
+                "  VALUES(?,?,?,?,?);";
 
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -416,9 +416,10 @@ public class DbBookDao implements BookDAO {
             connection = DbPool.getConnection();
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1,book.getName());
-            preparedStatement.setString(2,book.getAuthor().toString());
-            preparedStatement.setString(3,book.getGenre());
+            preparedStatement.setString(2, book.getAuthor().toString());
+            preparedStatement.setString(3, book.getGenre());
             preparedStatement.setString(4,book.getAnnotation());
+            preparedStatement.setString(5,book.getBookFilePath());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {

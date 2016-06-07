@@ -23,14 +23,20 @@
   </form>
 </div>
 
-<form action="controller" method="post" enctype="multipart/form-data">
+<form action="controller" method="post">
   <input type="hidden" name="command" value="add_book">
   book name <input type="text" name="book_name">
   author  <input type="text" name="author">
   genre <input type="text" name="genre"><br>
   annotation <textarea name="annotation"></textarea><br>
   <input type="submit" value="add book">
-
 </form>
+
+<div>
+  <form action="upload" method="post" enctype="multipart/form-data">
+    <input type="file" size="5000000000" name="upload">
+    <input type="submit" value="upload">
+  </form>
+</div>
 </body>
 </html>

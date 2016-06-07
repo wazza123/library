@@ -16,5 +16,8 @@
     <input class="book" type="submit" value="delete">
   </form>
 </c:forEach>
+<c:if test="${empty books}">
+  nothing to show
+</c:if>
 </body>
 </html>

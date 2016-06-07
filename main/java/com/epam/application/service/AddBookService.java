@@ -11,6 +11,7 @@ import com.epam.application.service.exception.ServiceException;
 
 public class AddBookService implements Service {
 
+    private final String BOOK_FILE_DIRECTORY = "D:\\erp\\";
 
     public Object getInformation(Object... params) throws ServiceException {
 
@@ -30,6 +31,7 @@ public class AddBookService implements Service {
         book.setAuthor(writer);
         book.setGenre(genre);
         book.setAnnotation(annotation);
+        book.setBookFilePath(BOOK_FILE_DIRECTORY + bookName);
 
         try {
 

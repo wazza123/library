@@ -21,6 +21,15 @@
         <url-pattern>/controller</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>uploadController</servlet-name>
+        <servlet-class>com.epam.application.controller.UploadController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>uploadController</servlet-name>
+        <url-pattern>/upload</url-pattern>
+    </servlet-mapping>
+
     <filter>
         <filter-name>filter</filter-name>
         <filter-class>com.epam.application.controller.AuthorizationFilter</filter-class>
