@@ -13,16 +13,11 @@ public class BookListService implements Service {
 
     private final String ALL_BOOK_CATEGORIES = "all";
 
-    public boolean execute(Object... params) throws ServiceException {
-
-        return false;
-    }
-
-    public Object getInformation(Object... params) throws ServiceException {
+    public Object execute(Object... params) throws ServiceException {
 
         String bookCategory = (String) params[0];
         DaoFactory daoFactory = DaoFactory.getDaoFactory();
-        BookDAO bookDAO = (BookDAO) daoFactory.getDao(DaoFactory.DaoType.DB_BOOk_DAO);
+        BookDAO bookDAO = (BookDAO) daoFactory.getDao(DaoFactory.DaoType.DB_BOOK_DAO);
         List<Book> books;
 
         try {

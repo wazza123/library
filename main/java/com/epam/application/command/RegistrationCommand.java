@@ -12,13 +12,13 @@ import javax.servlet.http.HttpSession;
 public class RegistrationCommand implements Command {
 
     final String PAGE = "WEB-INF/login.jsp";
-    final String ERROR_PAGE = "WEB-INF/error.jsp";
-    final String EXCEPTION_PAGE = "WEB-INF/errorPage.jsp";
     private final String REGISTRATION_PAGE = "registration.jsp";
     final String LOGIN_ATTRIBUTE = "login";
     final String PASSWORD_ATTRIBUTE = "password";
     private final String ERROR_MESSAGE_ATTRIBUTE = "error_message";
-    private final String ERROR_MESSAGE = "incorrect login or password!";
+    private final String ERROR_MESSAGE = "this login is already used!";
+    private final String USER_ROLE_ATTRIBUTE = "role";
+    private final String USER_ROLE = "user";
 
     public String execute(HttpServletRequest request) throws CommandException {
 
@@ -30,8 +30,9 @@ public class RegistrationCommand implements Command {
 
         try {
 
-            if((Boolean)service.getInformation(login,password)) {
+            if((Boolean)service.execute(login, password)) {
 
+                session.setAttribute(USER_ROLE_ATTRIBUTE,USER_ROLE);
                 return PAGE;
             }
 

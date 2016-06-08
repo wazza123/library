@@ -9,7 +9,7 @@ import com.epam.application.service.exception.ServiceException;
 
 public class RegistrationService implements Service {
 
-    public Object getInformation(Object... params) throws ServiceException {
+    public Object execute(Object... params) throws ServiceException {
 
         String login = (String) params[0];
         String password = (String) params[1];

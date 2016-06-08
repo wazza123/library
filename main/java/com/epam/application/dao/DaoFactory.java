@@ -13,7 +13,8 @@ public class DaoFactory {
 
         daoType = new HashMap<DaoType, Dao>(2);
         daoType.put(DaoType.DB_ACCOUNT_DAO, new DbAccountDao());
-        daoType.put(DaoType.DB_BOOk_DAO, new DbBookDao());
+        daoType.put(DaoType.DB_BOOK_DAO, new DbBookDao());
+        daoType.put(DaoType.DB_WRITER_DAO, new DbWriterDao());
     }
 
     public static DaoFactory getDaoFactory() {
@@ -26,5 +27,5 @@ public class DaoFactory {
         return daoType.get(dao);
     }
 
-    public enum DaoType {DB_ACCOUNT_DAO, DB_BOOk_DAO}
+    public enum DaoType {DB_ACCOUNT_DAO, DB_BOOK_DAO,DB_WRITER_DAO}
 }

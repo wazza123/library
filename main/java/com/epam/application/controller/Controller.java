@@ -16,7 +16,6 @@ public class Controller extends HttpServlet {
 
     final Logger LOGGER = Logger.getRootLogger();
     final String COMMAND_PARAMETER_NAME = "command";
-    final String LAST_PAGE_ATTRIBUTE_NAME = "page";
     final String ERROR_PAGE = "WEB-INF/errorPage.jsp";
 
     @Override

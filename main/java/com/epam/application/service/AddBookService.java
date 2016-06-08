@@ -13,7 +13,7 @@ public class AddBookService implements Service {
 
     private final String BOOK_FILE_DIRECTORY = "D:\\erp\\";
 
-    public Object getInformation(Object... params) throws ServiceException {
+    public Object execute(Object... params) throws ServiceException {
 
         String bookName = (String) params[0];
         String author = (String) params[1];
@@ -21,7 +21,7 @@ public class AddBookService implements Service {
         String annotation = (String) params[3];
 
         DaoFactory daoFactory = DaoFactory.getDaoFactory();
-        BookDAO bookDAO = (BookDAO) daoFactory.getDao(DaoFactory.DaoType.DB_BOOk_DAO);
+        BookDAO bookDAO = (BookDAO) daoFactory.getDao(DaoFactory.DaoType.DB_BOOK_DAO);
         Book book = new Book();
         Writer writer = new Writer();
 

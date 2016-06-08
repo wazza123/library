@@ -15,12 +15,10 @@ public class BookListCommand implements Command {
 
     private final String BOOK_TYPE_ATTRIBUTE = "book_type";
     private final String BOOK_LIST_ATTRIBUTE = "books";
-    private final String PAGE_ATTRIBUTE = "page";
     private final String PAGE = "WEB-INF/bookList.jsp";
     private final String ADMIN_BOOK_LIST_PAGE = "deleteBookList.jsp";
     private final String USER_ROLE_ATTRIBUTE = "role";
     private final String USER_ROLE = "user";
-    private final String ADMIN_ROLE = "admin";
 
     public String execute(HttpServletRequest request) throws CommandException {
 
@@ -38,7 +36,7 @@ public class BookListCommand implements Command {
 
         try {
 
-           books = (List<Book>) service.getInformation(bookCategory);
+           books = (List<Book>) service.execute(bookCategory);
         }
         catch (ServiceException e) {
 

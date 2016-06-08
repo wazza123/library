@@ -13,8 +13,7 @@
   <input type="hidden" name="command" value="authorization">
   <input type="submit" value="sign in">
   </form>
-<p style="color:red">${error_message}</p>
-
-  <a href="registration.jsp">sign up</a>
+<p id="msg" style="color:red">${error_message}</p>
+<a href="registration.jsp">sign up</a>
 </body>
 </html>

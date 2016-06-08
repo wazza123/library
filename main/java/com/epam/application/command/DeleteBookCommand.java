@@ -21,7 +21,7 @@ public class DeleteBookCommand implements Command {
 
         try {
 
-            service.getInformation(book_id);
+            service.execute(book_id);
         }
         catch (ServiceException e) {
 

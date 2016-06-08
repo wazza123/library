@@ -5,6 +5,6 @@
     <title></title>
 </head>
 <body>
-  В ходе работы, произошла непредвиденная ошибка. Повторите запрос позже.
+ unexpected error occur!
 </body>
 </html>

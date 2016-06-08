@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 public class BookInfoCommand implements Command {
 
     private final String INFO_PAGE = "WEB-INF/info.jsp";
-    private final String ERROR_PAGE = "";
     private final String BOOK_ID_ATTRIBUTE = "book_id";
     private final String BOOK_INFO_ATTRIBUTE = "book_info";
     private final String AUTHORIZATION_STATUS_ATTRIBUTE = "isAuthorized";
@@ -27,7 +26,7 @@ public class BookInfoCommand implements Command {
 
         try {
 
-            book = (Book) service.getInformation(bookId);
+            book = (Book) service.execute(bookId);
             page = INFO_PAGE;
         }
         catch (ServiceException e) {

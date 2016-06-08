@@ -15,7 +15,6 @@ public class AuthorizationCommand implements Command {
     private final static Logger LOGGER = Logger.getRootLogger();
     private final String AUTHORIZATION_PAGE = "authorization.jsp";
     private final String LOGIN_PAGE = "WEB-INF/login.jsp";
-    private final String ERROR_PAGE = "WEB-INF/error.jsp";
     private final String LOGIN_ATTRIBUTE_NAME = "login";
     private final String ADMIN_MAIN_PAGE = "WEB-INF/adminMainPage.jsp";
     private final String PASSWORD_ATTRIBUTE_NAME = "password";
@@ -34,9 +33,11 @@ public class AuthorizationCommand implements Command {
         Service service = serviceFactory.getService(ServiceFactory.ServiceType.AUTHORIZATION);
 
         try {
-        Account account = (Account) service.getInformation(enteredLogin,enteredPassword);
+        Account account = (Account) service.execute(enteredLogin, enteredPassword);
 
             if (account != null) {
+
+                request.getSession().setAttribute(LOGIN_ATTRIBUTE_NAME,enteredLogin);
 
                 if (account.getRole().equals(USER_ROLE)) {
 

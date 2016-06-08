@@ -5,5 +5,5 @@ import com.epam.application.service.exception.ServiceException;
 
 public interface Service {
 
-    public Object getInformation(Object... params) throws ServiceException;
+    public Object execute(Object... params) throws ServiceException;
 }

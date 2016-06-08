@@ -15,14 +15,10 @@
 <img class="book_picture" src="<jsp:getProperty name="book_info" property="bookCoverPath"/>"/>
 <div class="book_title">
     <jsp:getProperty name="book_info" property="name"/>
-    <jsp:getProperty name="book_info" property="name"/>
     <input type="hidden" name = "book_id" value="<jsp:getProperty name="book_info" property="id"/>">
 </div>
 <div class="book_author">
-    <form action="controller" method="post">
-        <input type="hidden" name="command" value="writer_info">
-  <input type="submit" value="<jsp:getProperty name="book_info" property="author"/> "/>
-    </form>
+    <jsp:getProperty name="book_info" property="author"/>
 </div>
 <div class="book_information">
     <jsp:getProperty name="book_info" property="annotation"/>

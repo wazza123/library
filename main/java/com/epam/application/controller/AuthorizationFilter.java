@@ -11,12 +11,8 @@ public class AuthorizationFilter implements Filter {
     private final String START_PAGE = "/index.jsp";
     private final String LOGIN_PAGE = "WEB-INF/login.jsp";
     private final String ADMIN_MAIN_PAGE = "WEB-INF/adminMainPage.jsp";
-    private final String LAST_PAGE_ATTRIBUTE_NAME = "page";
-    private final String SESSION_NAME_ATTRIBUTE = "session_name";
     private final String USER_ROLE_ATTRIBUTE = "role";
     private final String USER_ROLE = "user";
-    private final String ADMIN_ROLE = "admin";
-
 
     public void init(FilterConfig filterConfig) throws ServletException {
 

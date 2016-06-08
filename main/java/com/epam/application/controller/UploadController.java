@@ -59,9 +59,9 @@ public class UploadController extends HttpServlet {
                     // Write the file
                     if( fileName.lastIndexOf("\\") >= 0 ){
 
-                        file = new File( filePath + "sss") ;
+                        file = new File( filePath + fileName) ;
                     }else{
-                        file = new File( filePath + "sss") ;
+                        file = new File( filePath + fileName) ;
                     }
                     fi.write(file) ;
                 }
