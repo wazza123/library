@@ -1,7 +1,7 @@
 package com.epam.application.command;
 
 
-import com.epam.application.bean.Book;
+import com.epam.application.bean.Writer;
 import com.epam.application.command.exception.CommandException;
 import com.epam.application.service.Service;
 import com.epam.application.service.ServiceFactory;
@@ -9,25 +9,25 @@ import com.epam.application.service.exception.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class BookInfoCommand implements Command {
+public class WriterInfoCommand implements Command {
 
-    private final String INFO_PAGE = "WEB-INF/info.jsp";
-    private final String BOOK_ID_ATTRIBUTE = "book_id";
+    private final String INFO_PAGE = "WEB-INF/writerInfo.jsp";
+    private final String AUTHOR_ID_ATTRIBUTE = "author_id";
     private final String AUTHOR_ATTRIBUTE = "author";
-    private final String BOOK_INFO_ATTRIBUTE = "book_info";
+    private final String BOOKS_ATTRIBUTE = "book_info";
     private final String AUTHORIZATION_STATUS_ATTRIBUTE = "isAuthorized";
 
     public String execute(HttpServletRequest request) throws CommandException {
 
-        Integer bookId = Integer.valueOf(request.getParameter(BOOK_ID_ATTRIBUTE));
+        Integer writerId = Integer.valueOf(request.getParameter(AUTHOR_ID_ATTRIBUTE));
         ServiceFactory serviceFactory = ServiceFactory.getFactory();
-        Service service = serviceFactory.getService(ServiceFactory.ServiceType.BOOK_INFO);
+        Service service = serviceFactory.getService(ServiceFactory.ServiceType.WRITER_INFO);
         String page;
-        Book book;
+        Writer writer;
 
         try {
 
-            book = (Book) service.execute(bookId);
+            writer = (Writer) service.execute(writerId);
             page = INFO_PAGE;
         }
         catch (ServiceException e) {
@@ -35,8 +35,8 @@ public class BookInfoCommand implements Command {
             throw new CommandException(e);
         }
 
-        request.setAttribute(BOOK_INFO_ATTRIBUTE,book);
-        request.setAttribute(AUTHOR_ATTRIBUTE,book.getAuthor());
+        request.setAttribute(BOOKS_ATTRIBUTE,writer.getBooks());
+        request.setAttribute(AUTHOR_ATTRIBUTE,writer);
 
         if (request.getSession(false) == null) {
 

@@ -19,6 +19,7 @@ public class ServiceFactory {
         services.put(ServiceType.FIND_BOOK, new FindBookService());
         services.put(ServiceType.DELETE_BOOK, new DeleteBookService());
         services.put(ServiceType.ADD_BOOK, new AddBookService());
+        services.put(ServiceType.WRITER_INFO, new WriterInfoService());
     }
 
     public static ServiceFactory getFactory() {
@@ -37,5 +38,5 @@ public class ServiceFactory {
     }
 
     public enum ServiceType {AUTHORIZATION,BOOK_LIST,REGISTRATION,BOOK_INFO,FIND_BOOK,
-        DELETE_BOOK, ADD_BOOK};
+        DELETE_BOOK, ADD_BOOK,WRITER_INFO};
 }

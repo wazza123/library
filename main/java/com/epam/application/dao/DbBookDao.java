@@ -305,8 +305,100 @@ public class DbBookDao implements BookDAO {
         return books;
     }
 
-    public List<Book> getBooksByAuthor(String author) {
-        return null;
+    public List<Book> getBooksByAuthor(String author) throws DaoException {
+
+        String query ="SELECT bookstemp.book_id,book_name,genre,annotation,book_file_path,author,cover_img_file_path\n" +
+                "FROM bookstemp " +
+                "where author = ?;";
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        Book book = null;
+        Writer writer = null;
+        List<Book> books = new ArrayList<Book>();
+
+        try {
+
+            connection = DbPool.getConnection();
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,author);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+
+                if (resultSet.getString("book_name") != null) {
+
+                    book = new Book();
+                    writer = new Writer();
+                    book.setId(resultSet.getInt("book_id"));
+                    book.setName(resultSet.getString("book_name"));
+                    writer.setFirstName(resultSet.getString("author"));
+                    writer.setLastName("");
+                    book.setAuthor(writer);
+                    book.setGenre(resultSet.getString("genre"));
+                    book.setAnnotation(resultSet.getString("annotation"));
+                    book.setBookFilePath(resultSet.getString("book_file_path"));
+                    book.setBookCoverPath(resultSet.getString("cover_img_file_path"));
+                }
+
+                books.add(book);
+            }
+
+        } catch (SQLException e) {
+
+            LOGGER.error(e);
+            throw new DaoException(e);
+        }
+        catch (PoolNotInitException e) {
+
+            throw new DaoException(e);
+        }
+        catch (PoolConnectionException e) {
+
+            throw new DaoException(e);
+        }
+        catch (PropertyNotSetException e) {
+
+            throw new DaoException(e);
+        }
+        catch (InitPoolException e) {
+
+            throw new DaoException(e);
+        }
+        catch (IOException e) {
+
+            throw new DaoException(e);
+        }
+        finally {
+
+            try {
+
+                if (preparedStatement != null) {
+
+                    preparedStatement.close();
+                }
+
+                if (resultSet != null) {
+
+                    resultSet.close();
+                }
+
+                if (connection != null) {
+
+                    DbPool.returnConnection(connection);
+                }
+            }
+            catch (SQLException e) {
+
+                LOGGER.error("fail to close connection", e);
+            }
+            catch (PoolConnectionException e) {
+
+                LOGGER.error("fail to return connection to pool",e);
+            }
+        }
+
+        return books;
     }
 
     public List<Book> getAllBooks() throws DaoException {

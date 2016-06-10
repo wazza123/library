@@ -1,13 +1,14 @@
 package com.epam.application.bean;
 
 
+import java.util.List;
+
 public class Writer {
 
     private int id;
     private String firstName;
     private String lastName;
-    private String biography;
-
+    private List<Book> books;
 
     public int getId() {
 
@@ -39,19 +40,17 @@ public class Writer {
         this.lastName = lastName;
     }
 
-    public String getBiography() {
-
-        return biography;
-    }
-
-    public void setBiography(String biography) {
-
-        this.biography = biography;
-    }
-
     @Override
     public String toString() {
 
         return firstName + " " + lastName;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 }
