@@ -2,6 +2,7 @@ package com.epam.application.dao;
 
 
 import com.epam.application.bean.Book;
+import com.epam.application.bean.Writer;
 import com.epam.application.dao.exception.DaoException;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface BookDAO extends Dao {
 
     public List<Book> getBooksByGenre(String genre) throws DaoException;
 
-    public List<Book> getBooksByAuthor(String author) throws DaoException;
+    public List<Book> getBooksByAuthor(Writer author) throws DaoException;
 
     public List<Book> getAllBooks() throws DaoException;
 

@@ -11,6 +11,7 @@
 <div>
     Category: ${book_type}
 </div>
+<%--@elvariable id="books" type="java.util.List"--%>
 <c:forEach var="book" varStatus="status" items="${books}">
     <form action="controller" method="post">
         <img src="${book.bookCoverPath}" height="65" width="40"/>

@@ -1,6 +1,7 @@
 package com.epam.application.service;
 
 
+import com.epam.application.bean.Book;
 import com.epam.application.bean.Writer;
 import com.epam.application.dao.BookDAO;
 import com.epam.application.dao.DaoFactory;
@@ -8,26 +9,27 @@ import com.epam.application.dao.WriterDao;
 import com.epam.application.dao.exception.DaoException;
 import com.epam.application.service.exception.ServiceException;
 
-public class WriterInfoService implements Service {
+public class AddWriterService implements Service {
 
     public Object execute(Object... params) throws ServiceException {
 
-        Integer writerId =  Integer.valueOf((Integer) params[0]);
+        String firstName = (String) params[0];
+        String lastName = (String) params[1];
+
         DaoFactory daoFactory = DaoFactory.getDaoFactory();
-        BookDAO bookDAO = (BookDAO) daoFactory.getDao(DaoFactory.DaoType.DB_BOOK_DAO);
         WriterDao writerDao = (WriterDao) daoFactory.getDao(DaoFactory.DaoType.DB_WRITER_DAO);
-        Writer writer;
+        Writer writer = new Writer();
+        writer.setFirstName(firstName);
+        writer.setLastName(lastName);
 
         try {
 
-            writer = writerDao.getWriterById(writerId);
-            writer.setBooks(bookDAO.getBooksByAuthor(writer));
+            writerDao.addWriter(writer);
+            return true;
         }
         catch (DaoException e) {
 
             throw new ServiceException(e);
         }
-
-        return writer;
     }
 }

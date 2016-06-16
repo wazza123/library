@@ -21,7 +21,7 @@ public final class DbPool {
         if (pool == null) {
 
             PoolProperties poolProperties = new PoolProperties();
-            poolProperties.setProperties(new File("C:\\Users\\home\\IdeaProjects\\library\\src\\main\\resources\\pool.properties"));
+            poolProperties.setProperties(new File("D:\\pool.properties"));
             PoolFactory poolFactory = PoolFactory.getPoolFactory();
             pool = poolFactory.getPool(PoolFactory.PoolType.DB_POOL);
             pool.initPool(poolProperties);

@@ -8,6 +8,7 @@ import com.epam.application.service.ServiceFactory;
 import com.epam.application.service.exception.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 public class BookInfoCommand implements Command {
 

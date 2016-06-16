@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page session="false" %>
 <html>
 <head>
@@ -21,9 +22,9 @@
     <form action="controller" method="post">
       <img src="${book.bookCoverPath}" height="65" width="40"/>
       <input type="hidden" name="command" value="book_info">
-      <input class="book" type="submit" name="book_name" value="${book.name}">
-      <i>by: ${book.author}</i>
-      <input class="book" type="hidden" name="book_id" value="${book.id}">
+      <input type="hidden" name="book_id" value="${book.id}">
+      <input type="submit" name="book_name" value="${book.name}">
+      <i>by: ${author}</i>
     </form>
   </c:forEach>
 </div>

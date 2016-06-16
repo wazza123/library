@@ -20,6 +20,72 @@ public class DbWriterDao implements WriterDao {
 
     private static final Logger LOGGER = Logger.getRootLogger();
 
+    public void addWriter(Writer writer) throws DaoException {
+
+        String query ="INSERT INTO writers (first_name,last_name)" +
+                "  VALUES(?,?);";
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+
+            connection = DbPool.getConnection();
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,writer.getFirstName());
+            preparedStatement.setString(2, writer.getLastName());
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+
+            LOGGER.error(e);
+            throw new DaoException(e);
+        }
+        catch (PoolNotInitException e) {
+
+            throw new DaoException(e);
+        }
+        catch (PoolConnectionException e) {
+
+            throw new DaoException(e);
+        }
+        catch (PropertyNotSetException e) {
+
+            throw new DaoException(e);
+        }
+        catch (InitPoolException e) {
+
+            throw new DaoException(e);
+        }
+        catch (IOException e) {
+
+            throw new DaoException(e);
+        }
+        finally {
+
+            try {
+
+                if (preparedStatement != null) {
+
+                    preparedStatement.close();
+                }
+
+                if (connection != null) {
+
+                    DbPool.returnConnection(connection);
+                }
+            }
+            catch (SQLException e) {
+
+                LOGGER.error("fail to close connection", e);
+            }
+            catch (PoolConnectionException e) {
+
+                LOGGER.error("fail to return connection to pool",e);
+            }
+        }
+    }
+
     public Writer getWriterById(int id) throws DaoException {
 
         String query = "SELECT writer_id, first_name, last_name FROM writers WHERE writer_id = ?;";
@@ -43,9 +109,7 @@ public class DbWriterDao implements WriterDao {
                     writer = new Writer();
                     writer.setId(resultSet.getInt("writer_id"));
                     writer.setFirstName(resultSet.getString("first_name"));
-                    writer.setFirstName(resultSet.getString("last_name"));
-
-
+                    writer.setLastName(resultSet.getString("last_name"));
                 }
             }
         }
@@ -129,7 +193,7 @@ public class DbWriterDao implements WriterDao {
                     writer = new Writer();
                     writer.setId(resultSet.getInt("writer_id"));
                     writer.setFirstName(resultSet.getString("first_name"));
-                    writer.setFirstName(resultSet.getString("last_name"));
+                    writer.setLastName(resultSet.getString("last_name"));
 
 
                 }
@@ -215,9 +279,7 @@ public class DbWriterDao implements WriterDao {
                     writer = new Writer();
                     writer.setId(resultSet.getInt("writer_id"));
                     writer.setFirstName(resultSet.getString("first_name"));
-                    writer.setFirstName(resultSet.getString("last_name"));
-
-
+                    writer.setLastName(resultSet.getString("last_name"));
                 }
             }
         }

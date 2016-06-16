@@ -305,11 +305,11 @@ public class DbBookDao implements BookDAO {
         return books;
     }
 
-    public List<Book> getBooksByAuthor(String author) throws DaoException {
+    public List<Book> getBooksByAuthor(Writer author) throws DaoException {
 
-        String query ="SELECT bookstemp.book_id,book_name,genre,annotation,book_file_path,author,cover_img_file_path\n" +
-                "FROM bookstemp " +
-                "where author = ?;";
+        String query ="SELECT book_id,book_name,genre,annotation,book_file_path FROM books WHERE book_id = \n" +
+                "  (SELECT books_and_authors.book_id FROM books_and_authors WHERE writer_id = \n" +
+                "  (SELECT writer_id FROM writers WHERE first_name = ? AND last_name = ?));";
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -321,7 +321,8 @@ public class DbBookDao implements BookDAO {
 
             connection = DbPool.getConnection();
             preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1,author);
+            preparedStatement.setString(1,author.getFirstName());
+            preparedStatement.setString(2,author.getLastName());
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
@@ -332,13 +333,10 @@ public class DbBookDao implements BookDAO {
                     writer = new Writer();
                     book.setId(resultSet.getInt("book_id"));
                     book.setName(resultSet.getString("book_name"));
-                    writer.setFirstName(resultSet.getString("author"));
-                    writer.setLastName("");
                     book.setAuthor(writer);
                     book.setGenre(resultSet.getString("genre"));
                     book.setAnnotation(resultSet.getString("annotation"));
                     book.setBookFilePath(resultSet.getString("book_file_path"));
-                    book.setBookCoverPath(resultSet.getString("cover_img_file_path"));
                 }
 
                 books.add(book);
@@ -457,10 +455,12 @@ public class DbBookDao implements BookDAO {
         }
         catch (InitPoolException e) {
 
+            e.printStackTrace();
             throw new DaoException(e);
         }
         catch (IOException e) {
 
+            e.printStackTrace();
             throw new DaoException(e);
         }
         finally {

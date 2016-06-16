@@ -21,6 +21,7 @@ public class CommandFactory {
         commands.put(CommandType.DELETE_BOOK, new DeleteBookCommand());
         commands.put(CommandType.ADD_BOOK, new AddBookCommand());
         commands.put(CommandType.WRITER_INFO, new WriterInfoCommand());
+        commands.put(CommandType.ADD_WRITER, new AddWriterCommand());
     }
 
     public static CommandFactory getFactory() {
@@ -40,5 +41,5 @@ public class CommandFactory {
 
 
     public enum CommandType{AUTHORIZATION,LOGOUT,REGISTRATION,BOOK_LIST,BOOK_INFO,
-        FIND_BOOK,DELETE_BOOK, ADD_BOOK, WRITER_INFO}
+        FIND_BOOK,DELETE_BOOK, ADD_BOOK, WRITER_INFO, ADD_WRITER}
 }

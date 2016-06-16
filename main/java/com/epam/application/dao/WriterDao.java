@@ -6,6 +6,8 @@ import com.epam.application.dao.exception.DaoException;
 
 public interface WriterDao extends Dao {
 
+    public void addWriter(Writer writer) throws DaoException;
+
     public Writer getWriterById(int id) throws DaoException;
 
     public Writer getWriterByBook(int bookId) throws DaoException;

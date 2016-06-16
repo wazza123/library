@@ -5,13 +5,22 @@
          version="3.1">
 
 
-    <context-param>
-        <description>Location to store uploaded file</description>
-        <param-name>file-upload</param-name>
-        <param-value>
-            D:\\e\
-        </param-value>
-    </context-param>
+    <servlet>
+        <servlet-name>addBook</servlet-name>
+        <jsp-file>/WEB-INF/addBookPage.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addBook</servlet-name>
+        <url-pattern>/addBook</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>addWriter</servlet-name>
+        <jsp-file>/WEB-INF/addWriter.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addWriter</servlet-name>
+        <url-pattern>/addWriter</url-pattern>
+    </servlet-mapping>
     <servlet>
         <servlet-name>controller</servlet-name>
         <servlet-class>com.epam.application.controller.Controller</servlet-class>
