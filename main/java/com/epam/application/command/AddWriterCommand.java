@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 public class AddWriterCommand implements Command {
 
     private final String PAGE = "WEB-INF/adminMainPage.jsp";
-    private final String FIRST_NAME_ATTRIBUTE = "book_name";
-    private final String AUTHOR_ATTRIBUTE = "author";
+    private final String FIRST_NAME_ATTRIBUTE = "first_name";
+    private final String LAST_NAME_ATTRIBUTE = "last_name";
 
     public String execute(HttpServletRequest request) throws CommandException {
 
         String firstName = request.getParameter(FIRST_NAME_ATTRIBUTE);
-        String lastName = request.getParameter(AUTHOR_ATTRIBUTE);
+        String lastName = request.getParameter(LAST_NAME_ATTRIBUTE);
         ServiceFactory serviceFactory = ServiceFactory.getFactory();
         Service service = serviceFactory.getService(ServiceFactory.ServiceType.ADD_WRITER);
 

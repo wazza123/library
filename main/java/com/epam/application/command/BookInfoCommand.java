@@ -8,11 +8,11 @@ import com.epam.application.service.ServiceFactory;
 import com.epam.application.service.exception.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 public class BookInfoCommand implements Command {
 
     private final String INFO_PAGE = "WEB-INF/info.jsp";
+    private final String ADMIN_INFO_PAGE = "WEB-INF/adminBookInfo.jsp";
     private final String BOOK_ID_ATTRIBUTE = "book_id";
     private final String AUTHOR_ATTRIBUTE = "author";
     private final String BOOK_INFO_ATTRIBUTE = "book_info";
@@ -46,6 +46,11 @@ public class BookInfoCommand implements Command {
         else {
 
             request.setAttribute(AUTHORIZATION_STATUS_ATTRIBUTE,true);
+
+            if (request.getSession(false).getAttribute("role").equals("admin")) {
+
+                page = ADMIN_INFO_PAGE;
+            }
         }
         return page;
     }

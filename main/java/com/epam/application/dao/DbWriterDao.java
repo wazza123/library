@@ -15,6 +15,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DbWriterDao implements WriterDao {
 
@@ -170,14 +172,15 @@ public class DbWriterDao implements WriterDao {
         return writer;
     }
 
-    public Writer getWriterByBook(int bookId) throws DaoException {
+    public List<Writer> getWritersByBook(int bookId) throws DaoException {
 
-        String query = "SELECT writer_id, first_name, last_name FROM writers WHERE writer_id = \n" +
+        String query = "SELECT writer_id, first_name, last_name FROM writers WHERE writer_id IN \n" +
                 "  (SELECT writer_id FROM books_and_authors WHERE book_id = ?);";
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         Writer writer = null;
+        List<Writer> writers = new ArrayList<Writer>();
 
         try {
 
@@ -194,9 +197,9 @@ public class DbWriterDao implements WriterDao {
                     writer.setId(resultSet.getInt("writer_id"));
                     writer.setFirstName(resultSet.getString("first_name"));
                     writer.setLastName(resultSet.getString("last_name"));
-
-
                 }
+
+                writers.add(writer);
             }
         }
         catch (SQLException e) {
@@ -253,16 +256,17 @@ public class DbWriterDao implements WriterDao {
             }
         }
 
-        return writer;
+        return writers;
     }
 
-    public Writer getWriterByName(String firstName, String lastName) throws DaoException {
+    public List<Writer> getWritersByName(String firstName, String lastName) throws DaoException {
 
-        String query = "SELECT writer_id, first_name, last_name FROM writers WHERE first_name = ? AND last_name = ?);";
+        String query = "SELECT writer_id, first_name, last_name FROM writers WHERE first_name = ? AND last_name = ?;";
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         Writer writer = null;
+        List<Writer> writers = new ArrayList<Writer>();
 
         try {
 
@@ -281,6 +285,8 @@ public class DbWriterDao implements WriterDao {
                     writer.setFirstName(resultSet.getString("first_name"));
                     writer.setLastName(resultSet.getString("last_name"));
                 }
+
+                writers.add(writer);
             }
         }
         catch (SQLException e) {
@@ -337,6 +343,6 @@ public class DbWriterDao implements WriterDao {
             }
         }
 
-        return writer;
+        return writers;
     }
 }

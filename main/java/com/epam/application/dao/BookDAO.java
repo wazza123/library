@@ -22,4 +22,6 @@ public interface BookDAO extends Dao {
     public void addBook(Book book) throws DaoException;
 
     public void deleteBook(int BookId) throws DaoException;
+
+    public void addAuthor(int writerId, int bookId) throws DaoException;
 }

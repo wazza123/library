@@ -1,12 +1,14 @@
 package com.epam.application.bean;
 
 
+import java.util.List;
+
 public class Book {
 
     private int id;
     private String name;
     private String genre;
-    private Writer author;
+    private List<Writer> author;
     private String annotation;
     private String bookFilePath;
     private String bookCoverPath;
@@ -41,16 +43,6 @@ public class Book {
         this.genre = genre;
     }
 
-    public Writer getAuthor() {
-
-        return author;
-    }
-
-    public void setAuthor(Writer author) {
-
-        this.author = author;
-    }
-
     public String getAnnotation() {
 
         return annotation;
@@ -81,52 +73,11 @@ public class Book {
         this.annotation = annotation;
     }
 
-    public int hashCode() {
-
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + name.hashCode();
-        result = prime * result + author.hashCode();
-        result = prime * result + genre.hashCode();
-        result = prime * result + annotation.hashCode();
-        return result;
+    public List<Writer> getAuthor() {
+        return author;
     }
 
-    public boolean equals(Object obj) {
-
-        if (this == obj) {
-
-            return true;
-        }
-        if (obj == null) {
-
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-
-            return false;
-        }
-
-        Book other = (Book) obj;
-
-        if (!name.equals(other.getName())) {
-
-            return false;
-        }
-        if (!author.equals(other.getAuthor())) {
-
-            return false;
-        }
-        if (!genre.equals(other.getGenre())) {
-
-            return false;
-        }
-        if (!annotation.equals(other.getAnnotation())) {
-
-            return false;
-        }
-
-        return true;
+    public void setAuthor(List<Writer> author) {
+        this.author = author;
     }
-
 }

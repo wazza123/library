@@ -36,15 +36,9 @@
 </form>
 <form action="controller" method="post">
   <input type="hidden" name="command" value="book_list" />
-  <input type="hidden" name="book_type" value="other" />
-  <input type="submit" value="Other"/>
+  <input type="hidden" name="book_type" value="Drama" />
+  <input type="submit" value="Drama"/>
 </form>
-  <form action="controller" method="post">
-    <input type="hidden" name="command" value="book_list" />
-    <input type="hidden" name="book_type" value="other" />
-    <input type="submit" value="Other"/>
-  </form>
-
   <form action="controller" method="post">
     <input type="hidden" name="command" value="book_list" />
     <input type="hidden" name="book_type" value="other" />

@@ -44,18 +44,6 @@ public class BookListCommand implements Command {
         }
 
         request.setAttribute(BOOK_LIST_ATTRIBUTE,books);
-
-        if (userRole == null) {
-
-            return PAGE;
-        }
-        else if (userRole.equals(USER_ROLE)) {
-
-            return PAGE;
-        }
-        else {
-
-            return ADMIN_BOOK_LIST_PAGE;
-        }
+        return PAGE;
     }
 }

@@ -18,12 +18,12 @@
 <br><br><br><br><br><br><br><br><br><br><br><br>
 <div>
   <h1>other writer's books:</h1>
-  <c:forEach var="book" varStatus="status" items="${books}">
+  <c:forEach var="writer" varStatus="status" items="${books}">
     <form action="controller" method="post">
-      <img src="${book.bookCoverPath}" height="65" width="40"/>
+      <img src="${writer.bookCoverPath}" height="65" width="40"/>
       <input type="hidden" name="command" value="book_info">
-      <input type="hidden" name="book_id" value="${book.id}">
-      <input type="submit" name="book_name" value="${book.name}">
+      <input type="hidden" name="book_id" value="${writer.id}">
+      <input type="submit" name="book_name" value="${writer.name}">
       <i>by: ${author}</i>
     </form>
   </c:forEach>

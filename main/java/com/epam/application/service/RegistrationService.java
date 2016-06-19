@@ -18,7 +18,7 @@ public class RegistrationService implements Service {
         Account account = new Account();
 
         account.setLogin(login);
-        account.setPassword(password);
+        account.setPassword( StringEncoder.encodeString(password) );
 
         try {
 

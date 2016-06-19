@@ -8,6 +8,7 @@ public class Writer {
     private int id;
     private String firstName;
     private String lastName;
+    private String writerPhotoPath;
     private List<Book> books;
 
     public int getId() {
@@ -52,5 +53,13 @@ public class Writer {
 
     public void setBooks(List<Book> books) {
         this.books = books;
+    }
+
+    public String getWriterPhotoPath() {
+        return writerPhotoPath;
+    }
+
+    public void setWriterPhotoPath(String writerPhotoPath) {
+        this.writerPhotoPath = writerPhotoPath;
     }
 }

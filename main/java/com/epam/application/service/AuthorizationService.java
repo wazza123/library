@@ -16,6 +16,7 @@ public class AuthorizationService implements Service {
 
         String login = (String) params[0];
         String password = (String) params[1];
+        String passwordHash = StringEncoder.encodeString(password);
 
         DaoFactory daoFactory = DaoFactory.getDaoFactory();
         AccountDAO accountDAO = (AccountDAO) daoFactory.getDao(DaoFactory.DaoType.DB_ACCOUNT_DAO);
@@ -35,7 +36,7 @@ public class AuthorizationService implements Service {
 
             return null;
         }
-        else if (account.getLogin().equals(login) && account.getPassword().equals(password)) {
+        else if (account.getLogin().equals(login) && account.getPassword().equals(passwordHash)) {
 
             return account;
         }

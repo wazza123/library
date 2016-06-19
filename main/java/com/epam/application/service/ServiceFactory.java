@@ -21,6 +21,8 @@ public class ServiceFactory {
         services.put(ServiceType.ADD_BOOK, new AddBookService());
         services.put(ServiceType.WRITER_INFO, new WriterInfoService());
         services.put(ServiceType.ADD_WRITER, new AddWriterService());
+        services.put(ServiceType.FIND_WRITER, new FindWriterService());
+        services.put(ServiceType.ADD_BOOK_AUTHOR, new AddBookAuthorService());
     }
 
     public static ServiceFactory getFactory() {
@@ -39,5 +41,5 @@ public class ServiceFactory {
     }
 
     public enum ServiceType {AUTHORIZATION,BOOK_LIST,REGISTRATION,BOOK_INFO,FIND_BOOK,
-        DELETE_BOOK, ADD_BOOK,WRITER_INFO,ADD_WRITER};
+        DELETE_BOOK, ADD_BOOK,WRITER_INFO,ADD_WRITER,FIND_WRITER,ADD_BOOK_AUTHOR};
 }

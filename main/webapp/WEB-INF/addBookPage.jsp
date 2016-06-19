@@ -8,7 +8,6 @@
 <form action="controller" method="post">
   <input type="hidden" name="command" value="add_book">
   book name <input id="book_name" type="text" name="book_name">
-  author  <input id="author" type="text" name="author">
   genre <input id="genre" type="text" name="genre"><br>
   annotation <textarea id="annotation" name="annotation"></textarea><br>
   <input type="submit" value="add book">
