@@ -38,7 +38,6 @@ public class WriterInfoCommand implements Command {
         }
 
         request.setAttribute(BOOKS_ATTRIBUTE, (List) writer.getBooks());
-        List list = (List) request.getAttribute("books");
         request.setAttribute(AUTHOR_ATTRIBUTE,writer);
 
         if (request.getSession(false) == null) {

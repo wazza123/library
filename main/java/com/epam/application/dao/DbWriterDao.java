@@ -3,10 +3,7 @@ package com.epam.application.dao;
 
 import com.epam.application.bean.Writer;
 import com.epam.application.dao.connectionPool.DbPool;
-import com.epam.application.dao.connectionPool.exception.InitPoolException;
-import com.epam.application.dao.connectionPool.exception.PoolConnectionException;
-import com.epam.application.dao.connectionPool.exception.PoolNotInitException;
-import com.epam.application.dao.connectionPool.exception.PropertyNotSetException;
+import com.epam.application.dao.connectionPool.exception.*;
 import com.epam.application.dao.exception.DaoException;
 import org.apache.log4j.Logger;
 
@@ -38,28 +35,12 @@ public class DbWriterDao implements WriterDao {
             preparedStatement.setString(2, writer.getLastName());
             preparedStatement.executeUpdate();
 
-        } catch (SQLException e) {
-
-            LOGGER.error(e);
-            throw new DaoException(e);
         }
-        catch (PoolNotInitException e) {
+        catch (SQLException e) {
 
             throw new DaoException(e);
         }
-        catch (PoolConnectionException e) {
-
-            throw new DaoException(e);
-        }
-        catch (PropertyNotSetException e) {
-
-            throw new DaoException(e);
-        }
-        catch (InitPoolException e) {
-
-            throw new DaoException(e);
-        }
-        catch (IOException e) {
+        catch (DbPoolException e) {
 
             throw new DaoException(e);
         }
@@ -81,7 +62,7 @@ public class DbWriterDao implements WriterDao {
 
                 LOGGER.error("fail to close connection", e);
             }
-            catch (PoolConnectionException e) {
+            catch (DbPoolException e) {
 
                 LOGGER.error("fail to return connection to pool",e);
             }
@@ -117,26 +98,9 @@ public class DbWriterDao implements WriterDao {
         }
         catch (SQLException e) {
 
-            e.printStackTrace();
             throw new DaoException(e);
         }
-        catch (PoolNotInitException e) {
-
-            throw new DaoException(e);
-        }
-        catch (PoolConnectionException e) {
-
-            throw new DaoException(e);
-        }
-        catch (PropertyNotSetException e) {
-
-            throw new DaoException(e);
-        }
-        catch (InitPoolException e) {
-
-            throw new DaoException(e);
-        }
-        catch (IOException e) {
+        catch (DbPoolException e) {
 
             throw new DaoException(e);
         }
@@ -163,7 +127,7 @@ public class DbWriterDao implements WriterDao {
 
                 LOGGER.error("fail to close connection", e);
             }
-            catch (PoolConnectionException e) {
+            catch (DbPoolException e) {
 
                 LOGGER.error("fail to return connection to pool",e);
             }
@@ -204,26 +168,9 @@ public class DbWriterDao implements WriterDao {
         }
         catch (SQLException e) {
 
-            e.printStackTrace();
             throw new DaoException(e);
         }
-        catch (PoolNotInitException e) {
-
-            throw new DaoException(e);
-        }
-        catch (PoolConnectionException e) {
-
-            throw new DaoException(e);
-        }
-        catch (PropertyNotSetException e) {
-
-            throw new DaoException(e);
-        }
-        catch (InitPoolException e) {
-
-            throw new DaoException(e);
-        }
-        catch (IOException e) {
+        catch (DbPoolException e) {
 
             throw new DaoException(e);
         }
@@ -250,7 +197,7 @@ public class DbWriterDao implements WriterDao {
 
                 LOGGER.error("fail to close connection", e);
             }
-            catch (PoolConnectionException e) {
+            catch (DbPoolException e) {
 
                 LOGGER.error("fail to return connection to pool",e);
             }
@@ -291,26 +238,9 @@ public class DbWriterDao implements WriterDao {
         }
         catch (SQLException e) {
 
-            e.printStackTrace();
             throw new DaoException(e);
         }
-        catch (PoolNotInitException e) {
-
-            throw new DaoException(e);
-        }
-        catch (PoolConnectionException e) {
-
-            throw new DaoException(e);
-        }
-        catch (PropertyNotSetException e) {
-
-            throw new DaoException(e);
-        }
-        catch (InitPoolException e) {
-
-            throw new DaoException(e);
-        }
-        catch (IOException e) {
+        catch (DbPoolException e) {
 
             throw new DaoException(e);
         }
@@ -337,7 +267,7 @@ public class DbWriterDao implements WriterDao {
 
                 LOGGER.error("fail to close connection", e);
             }
-            catch (PoolConnectionException e) {
+            catch (DbPoolException e) {
 
                 LOGGER.error("fail to return connection to pool",e);
             }

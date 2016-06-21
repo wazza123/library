@@ -15,7 +15,7 @@ public class FindBookService implements Service {
 
     public Object execute(Object... params) throws ServiceException {
 
-        String bookNaMe = (String) params[0];
+        String bookName = (String) params[0];
         DaoFactory daoFactory = DaoFactory.getDaoFactory();
         BookDAO bookDAO = (BookDAO) daoFactory.getDao(DaoFactory.DaoType.DB_BOOK_DAO);
         WriterDao writerDao = (WriterDao) daoFactory.getDao(DaoFactory.DaoType.DB_WRITER_DAO);
@@ -24,7 +24,7 @@ public class FindBookService implements Service {
 
         try {
 
-            books =  bookDAO.getBooksByName(bookNaMe);
+            books =  bookDAO.getBooksByName(bookName);
 
             for (int i = 0; i < books.size(); i++) {
 

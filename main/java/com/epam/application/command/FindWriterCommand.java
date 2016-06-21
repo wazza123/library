@@ -15,6 +15,7 @@ public class FindWriterCommand implements Command {
     private final String AUTHOR_FIRST_NAME_ATTRIBUTE = "first_name";
     private final String AUTHOR_LAST_NAME_ATTRIBUTE = "last_name";
     private final String WRITER_LIST_ATTRIBUTE = "writers";
+    private final String BOOK_ID_ATTRIBUTE = "book_id";
     private final String PAGE = "WEB-INF/writerList.jsp";
 
     public String execute(HttpServletRequest request) throws CommandException {
@@ -30,7 +31,7 @@ public class FindWriterCommand implements Command {
 
             writers = (List<Writer>) service.execute(firstName,lastName);
             request.setAttribute(WRITER_LIST_ATTRIBUTE,writers);
-            request.setAttribute("book_id",bookId);
+            request.setAttribute(BOOK_ID_ATTRIBUTE,bookId);
         }
         catch (ServiceException e) {
 

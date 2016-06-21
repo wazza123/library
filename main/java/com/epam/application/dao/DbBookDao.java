@@ -4,10 +4,7 @@ package com.epam.application.dao;
 import com.epam.application.bean.Book;
 import com.epam.application.bean.Writer;
 import com.epam.application.dao.connectionPool.DbPool;
-import com.epam.application.dao.connectionPool.exception.InitPoolException;
-import com.epam.application.dao.connectionPool.exception.PoolConnectionException;
-import com.epam.application.dao.connectionPool.exception.PoolNotInitException;
-import com.epam.application.dao.connectionPool.exception.PropertyNotSetException;
+import com.epam.application.dao.connectionPool.exception.*;
 import com.epam.application.dao.exception.DaoException;
 import org.apache.log4j.Logger;
 
@@ -45,7 +42,6 @@ public class DbBookDao implements BookDAO {
                 if (resultSet.getString("book_name") != null) {
 
                     book = new Book();
-                    writer = new Writer();
                     book.setId(resultSet.getInt("book_id"));
                     book.setName(resultSet.getString("book_name"));
                     book.setGenre(resultSet.getString("genre"));
@@ -57,26 +53,9 @@ public class DbBookDao implements BookDAO {
         }
         catch (SQLException e) {
 
-            e.printStackTrace();
             throw new DaoException(e);
         }
-        catch (PoolNotInitException e) {
-
-            throw new DaoException(e);
-        }
-        catch (PoolConnectionException e) {
-
-            throw new DaoException(e);
-        }
-        catch (PropertyNotSetException e) {
-
-            throw new DaoException(e);
-        }
-        catch (InitPoolException e) {
-
-            throw new DaoException(e);
-        }
-        catch (IOException e) {
+        catch (DbPoolException e) {
 
             throw new DaoException(e);
         }
@@ -103,7 +82,7 @@ public class DbBookDao implements BookDAO {
 
                 LOGGER.error("fail to close connection", e);
             }
-            catch (PoolConnectionException e) {
+            catch (DbPoolException e) {
 
                 LOGGER.error("fail to return connection to pool",e);
             }
@@ -148,26 +127,9 @@ public class DbBookDao implements BookDAO {
         }
         catch (SQLException e) {
 
-            e.printStackTrace();
             throw new DaoException(e);
         }
-        catch (PoolNotInitException e) {
-
-            throw new DaoException(e);
-        }
-        catch (PoolConnectionException e) {
-
-            throw new DaoException(e);
-        }
-        catch (PropertyNotSetException e) {
-
-            throw new DaoException(e);
-        }
-        catch (InitPoolException e) {
-
-            throw new DaoException(e);
-        }
-        catch (IOException e) {
+        catch (DbPoolException e) {
 
             throw new DaoException(e);
         }
@@ -194,7 +156,7 @@ public class DbBookDao implements BookDAO {
 
                 LOGGER.error("fail to close connection", e);
             }
-            catch (PoolConnectionException e) {
+            catch (DbPoolException e) {
 
                 LOGGER.error("fail to return connection to pool",e);
             }
@@ -241,26 +203,9 @@ public class DbBookDao implements BookDAO {
 
         } catch (SQLException e) {
 
-            LOGGER.error(e);
             throw new DaoException(e);
         }
-        catch (PoolNotInitException e) {
-
-            throw new DaoException(e);
-        }
-        catch (PoolConnectionException e) {
-
-            throw new DaoException(e);
-        }
-        catch (PropertyNotSetException e) {
-
-            throw new DaoException(e);
-        }
-        catch (InitPoolException e) {
-
-            throw new DaoException(e);
-        }
-        catch (IOException e) {
+        catch (DbPoolException e) {
 
             throw new DaoException(e);
         }
@@ -287,7 +232,7 @@ public class DbBookDao implements BookDAO {
 
                 LOGGER.error("fail to close connection", e);
             }
-            catch (PoolConnectionException e) {
+            catch (DbPoolException e) {
 
                 LOGGER.error("fail to return connection to pool",e);
             }
@@ -334,26 +279,9 @@ public class DbBookDao implements BookDAO {
 
         } catch (SQLException e) {
 
-            LOGGER.error(e);
             throw new DaoException(e);
         }
-        catch (PoolNotInitException e) {
-
-            throw new DaoException(e);
-        }
-        catch (PoolConnectionException e) {
-
-            throw new DaoException(e);
-        }
-        catch (PropertyNotSetException e) {
-
-            throw new DaoException(e);
-        }
-        catch (InitPoolException e) {
-
-            throw new DaoException(e);
-        }
-        catch (IOException e) {
+        catch (DbPoolException e) {
 
             throw new DaoException(e);
         }
@@ -380,7 +308,7 @@ public class DbBookDao implements BookDAO {
 
                 LOGGER.error("fail to close connection", e);
             }
-            catch (PoolConnectionException e) {
+            catch (DbPoolException e) {
 
                 LOGGER.error("fail to return connection to pool",e);
             }
@@ -423,31 +351,13 @@ public class DbBookDao implements BookDAO {
                 books.add(book);
             }
 
-        } catch (SQLException e) {
-
-            LOGGER.error(e);
-            throw new DaoException(e);
         }
-        catch (PoolNotInitException e) {
+        catch (SQLException e) {
 
             throw new DaoException(e);
         }
-        catch (PoolConnectionException e) {
+        catch (DbPoolException e) {
 
-            throw new DaoException(e);
-        }
-        catch (PropertyNotSetException e) {
-
-            throw new DaoException(e);
-        }
-        catch (InitPoolException e) {
-
-            e.printStackTrace();
-            throw new DaoException(e);
-        }
-        catch (IOException e) {
-
-            e.printStackTrace();
             throw new DaoException(e);
         }
         finally {
@@ -473,7 +383,7 @@ public class DbBookDao implements BookDAO {
 
                 LOGGER.error("fail to close connection", e);
             }
-            catch (PoolConnectionException e) {
+            catch (DbPoolException e) {
 
                 LOGGER.error("fail to return connection to pool",e);
             }
@@ -503,26 +413,9 @@ public class DbBookDao implements BookDAO {
         }
         catch (SQLException e) {
 
-            LOGGER.error(e);
             throw new DaoException(e);
         }
-        catch (PoolNotInitException e) {
-
-            throw new DaoException(e);
-        }
-        catch (PoolConnectionException e) {
-
-            throw new DaoException(e);
-        }
-        catch (PropertyNotSetException e) {
-
-            throw new DaoException(e);
-        }
-        catch (InitPoolException e) {
-
-            throw new DaoException(e);
-        }
-        catch (IOException e) {
+        catch (DbPoolException e) {
 
             throw new DaoException(e);
         }
@@ -544,7 +437,7 @@ public class DbBookDao implements BookDAO {
 
                 LOGGER.error("fail to close connection", e);
             }
-            catch (PoolConnectionException e) {
+            catch (DbPoolException e) {
 
                 LOGGER.error("fail to return connection to pool",e);
             }
@@ -553,7 +446,7 @@ public class DbBookDao implements BookDAO {
 
     public void deleteBook(int bookId) throws DaoException {
 
-        String query ="DELETE FROM bookstemp WHERE book_id = " + bookId + ";";
+        String query ="DELETE FROM bookstemp WHERE book_id = ?;";
 
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -562,31 +455,13 @@ public class DbBookDao implements BookDAO {
 
             connection = DbPool.getConnection();
             preparedStatement = connection.prepareStatement(query);
-            //preparedStatement.setInt(1,bookId);
-            preparedStatement.executeUpdate(query);
-
-        } catch (SQLException e) {
-
-            LOGGER.error(e);
-            throw new DaoException(e);
+            preparedStatement.setInt(1, bookId);
         }
-        catch (PoolNotInitException e) {
+        catch (SQLException e) {
 
             throw new DaoException(e);
         }
-        catch (PoolConnectionException e) {
-
-            throw new DaoException(e);
-        }
-        catch (PropertyNotSetException e) {
-
-            throw new DaoException(e);
-        }
-        catch (InitPoolException e) {
-
-            throw new DaoException(e);
-        }
-        catch (IOException e) {
+        catch (DbPoolException e) {
 
             throw new DaoException(e);
         }
@@ -608,7 +483,7 @@ public class DbBookDao implements BookDAO {
 
                 LOGGER.error("fail to close connection", e);
             }
-            catch (PoolConnectionException e) {
+            catch (DbPoolException e) {
 
                 LOGGER.error("fail to return connection to pool",e);
             }
@@ -634,26 +509,9 @@ public class DbBookDao implements BookDAO {
         }
         catch (SQLException e) {
 
-            LOGGER.error(e);
             throw new DaoException(e);
         }
-        catch (PoolNotInitException e) {
-
-            throw new DaoException(e);
-        }
-        catch (PoolConnectionException e) {
-
-            throw new DaoException(e);
-        }
-        catch (PropertyNotSetException e) {
-
-            throw new DaoException(e);
-        }
-        catch (InitPoolException e) {
-
-            throw new DaoException(e);
-        }
-        catch (IOException e) {
+        catch (DbPoolException e) {
 
             throw new DaoException(e);
         }
@@ -675,7 +533,7 @@ public class DbBookDao implements BookDAO {
 
                 LOGGER.error("fail to close connection", e);
             }
-            catch (PoolConnectionException e) {
+            catch (DbPoolException e) {
 
                 LOGGER.error("fail to return connection to pool",e);
             }

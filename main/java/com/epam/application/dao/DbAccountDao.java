@@ -3,10 +3,7 @@ package com.epam.application.dao;
 
 import com.epam.application.bean.Account;
 import com.epam.application.dao.connectionPool.DbPool;
-import com.epam.application.dao.connectionPool.exception.InitPoolException;
-import com.epam.application.dao.connectionPool.exception.PoolConnectionException;
-import com.epam.application.dao.connectionPool.exception.PoolNotInitException;
-import com.epam.application.dao.connectionPool.exception.PropertyNotSetException;
+import com.epam.application.dao.connectionPool.exception.*;
 import com.epam.application.dao.exception.DaoException;
 import org.apache.log4j.Logger;
 
@@ -38,48 +35,32 @@ public class DbAccountDao implements AccountDAO {
         }
         catch (SQLException e) {
 
-            LOGGER.error(e.getMessage());
-            throw new DaoException(e);
-        }
-        catch (PoolNotInitException e) {
+                LOGGER.error(e.getMessage());
+                throw new DaoException(e);
+            }
+            catch (DbPoolException e) {
 
-            throw new DaoException(e);
-        }
-        catch (PoolConnectionException e) {
+                throw new DaoException(e);
+            }
+            finally {
 
-            throw new DaoException(e);
-        }
-        catch (PropertyNotSetException e) {
+                try {
 
-            throw new DaoException(e);
-        }
-        catch (InitPoolException e) {
+                    if (preparedStatement != null) {
 
-            throw new DaoException(e);
-        }
-        catch (IOException e) {
+                        preparedStatement.close();
+                    }
 
-            throw new DaoException(e);
-        }
-        finally {
-
-            try {
-
-                if (preparedStatement != null) {
-
-                    preparedStatement.close();
+                    DbPool.returnConnection(connection);
                 }
+                catch (DbPoolException e) {
 
-                DbPool.returnConnection(connection);
-            }
-            catch (PoolConnectionException e) {
+                    LOGGER.error("fail to return connection to pool",e);
+                }
+                catch (SQLException e) {
 
-                LOGGER.error("fail to return connection to pool",e);
-            }
-            catch (SQLException e) {
-
-                LOGGER.error("fail to close connection", e);
-            }
+                    LOGGER.error("fail to close connection", e);
+                }
         }
 
     }
@@ -119,26 +100,9 @@ public class DbAccountDao implements AccountDAO {
 
         } catch (SQLException e) {
 
-            e.printStackTrace();
             throw new DaoException(e);
         }
-        catch (PoolNotInitException e) {
-
-            throw new DaoException(e);
-        }
-        catch (PoolConnectionException e) {
-
-            throw new DaoException(e);
-        }
-        catch (PropertyNotSetException e) {
-
-            throw new DaoException(e);
-        }
-        catch (InitPoolException e) {
-
-            throw new DaoException(e);
-        }
-        catch (IOException e) {
+        catch (DbPoolException e) {
 
             throw new DaoException(e);
         }
@@ -165,7 +129,7 @@ public class DbAccountDao implements AccountDAO {
 
                 LOGGER.error("fail to close connection", e);
             }
-            catch (PoolConnectionException e) {
+            catch (DbPoolException e) {
 
                 LOGGER.error("fail to return connection to pool",e);
             }

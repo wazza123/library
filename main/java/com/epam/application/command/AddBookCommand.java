@@ -24,82 +24,24 @@ public class AddBookCommand implements Command {
     private final String ANNOTATION_ATTRIBUTE = "annotation";
     private final String BOOK_FILE_ATTRIBUTE = "book_file";
 
-    private File uploadFile(HttpServletRequest request) {
-
-        boolean isMultipart;
-        String filePath;
-        int maxFileSize = 5000000 * 1024;
-        int maxMemSize = 400 * 1024;
-        File file = null;
-
-        //filePath = request.getServletContext().getInitParameter("file-upload");
-        filePath = "D:\\erp\\";
-        isMultipart = ServletFileUpload.isMultipartContent(request);
-
-        DiskFileItemFactory factory = new DiskFileItemFactory();
-        // maximum size that will be stored in memory
-        factory.setSizeThreshold(maxMemSize);
-        // Location to save data that is larger than maxMemSize.
-        factory.setRepository(new File("c:\\temp"));
-
-        // Create a new file upload handler
-        ServletFileUpload upload = new ServletFileUpload(factory);
-        // maximum file size to be uploaded.
-        upload.setSizeMax(maxFileSize);
-
-        try {
-            // Parse the request to get file items.
-            List fileItems = upload.parseRequest(request);
-
-            // Process the uploaded file items
-            Iterator i = fileItems.iterator();
-
-            while (i.hasNext()) {
-                FileItem fi = (FileItem) i.next();
-                if (!fi.isFormField()) {
-                    // Get the uploaded file parameters
-                    String fieldName = fi.getFieldName();
-                    String fileName = fi.getName();
-                    String contentType = fi.getContentType();
-                    boolean isInMemory = fi.isInMemory();
-                    long sizeInBytes = fi.getSize();
-                    // Write the file
-                    if (fileName.lastIndexOf("\\") >= 0) {
-
-                        file = new File(filePath + fileName);
-                    } else {
-                        file = new File(filePath + fileName);
-                    }
-                    fi.write(file);
-                    return file;
-                }
-            }
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
-        return file;
-    }
-
-
     public String execute(HttpServletRequest request) throws CommandException {
 
         try {
 
             String bookName = request.getParameter(BOOK_NAME_ATTRIBUTE);
-        String author = request.getParameter(AUTHOR_ATTRIBUTE);
-        String genre = request.getParameter(GENRE_ATTRIBUTE);
-        String annotation = request.getParameter(ANNOTATION_ATTRIBUTE);
-        String bookFile = request.getParameter(BOOK_FILE_ATTRIBUTE);
+            String author = request.getParameter(AUTHOR_ATTRIBUTE);
+            String genre = request.getParameter(GENRE_ATTRIBUTE);
+            String annotation = request.getParameter(ANNOTATION_ATTRIBUTE);
+            String bookFile = request.getParameter(BOOK_FILE_ATTRIBUTE);
 
-        ServiceFactory serviceFactory = ServiceFactory.getFactory();
-        Service service = serviceFactory.getService(ServiceFactory.ServiceType.ADD_BOOK);
-        service.execute(bookName, author, genre, annotation,bookFile);
+            ServiceFactory serviceFactory = ServiceFactory.getFactory();
+            Service service = serviceFactory.getService(ServiceFactory.ServiceType.ADD_BOOK);
+            service.execute(bookName, author, genre, annotation,bookFile);
         }
         catch (ServiceException e) {
 
             throw new CommandException(e);
         }
-
 
         return PAGE;
     }

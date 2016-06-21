@@ -1,10 +1,7 @@
 package com.epam.application.dao.connectionPool;
 
 
-import com.epam.application.dao.connectionPool.exception.InitPoolException;
-import com.epam.application.dao.connectionPool.exception.PoolConnectionException;
-import com.epam.application.dao.connectionPool.exception.PoolNotInitException;
-import com.epam.application.dao.connectionPool.exception.PropertyNotSetException;
+import com.epam.application.dao.connectionPool.exception.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,28 +13,61 @@ public final class DbPool {
 
     private DbPool() {}
 
-    public static ConnectionPool createPool() throws IOException, PropertyNotSetException, InitPoolException {
+    public static ConnectionPool createPool() throws DbPoolException {
 
         if (pool == null) {
 
-            PoolProperties poolProperties = new PoolProperties();
-            poolProperties.setProperties(new File("D:\\pool.properties"));
-            PoolFactory poolFactory = PoolFactory.getPoolFactory();
-            pool = poolFactory.getPool(PoolFactory.PoolType.DB_POOL);
-            pool.initPool(poolProperties);
+            try {
+
+                PoolProperties poolProperties = new PoolProperties();
+                poolProperties.setProperties(new File("D:\\pool.properties"));
+                PoolFactory poolFactory = PoolFactory.getPoolFactory();
+                pool = poolFactory.getPool(PoolFactory.PoolType.DB_POOL);
+                pool.initPool(poolProperties);
+            }
+            catch (PropertyNotSetException e) {
+
+                throw new DbPoolException(e);
+            }
+            catch (InitPoolException e) {
+
+                throw new DbPoolException(e);
+            }
+            catch (IOException e) {
+
+                throw new DbPoolException(e);
+            }
         }
 
         return pool;
     }
 
-    public static Connection getConnection() throws PoolNotInitException, PoolConnectionException, InitPoolException, IOException, PropertyNotSetException {
+    public static Connection getConnection() throws DbPoolException {
 
         createPool();
-        return (Connection) pool.getConnection();
+        try {
+
+            return (Connection) pool.getConnection();
+        }
+        catch (PoolNotInitException e) {
+
+            throw new DbPoolException(e);
+        }
+        catch (PoolConnectionException e) {
+
+            throw new DbPoolException(e);
+        }
     }
 
-    public static void returnConnection(Connection connection) throws PoolConnectionException {
+    public static void returnConnection(Connection connection) throws DbPoolException {
 
-        pool.retrieveConnection(connection); //if connection != null
+        try {
+
+            pool.retrieveConnection(connection); //if connection != null
+        }
+        catch (PoolConnectionException e) {
+
+            throw new DbPoolException(e);
+        }
     }
 }

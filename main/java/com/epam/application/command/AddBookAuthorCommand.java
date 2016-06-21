@@ -20,8 +20,6 @@ public class AddBookAuthorCommand implements Command {
 
         int bookId = Integer.parseInt(request.getParameter(BOOK_ID_ATTRIBUTE));
         int writerId = Integer.parseInt(request.getParameter(WRITER_ID_ATTRIBUTE));
-        String author_first_name = request.getParameter(AUTHOR_FIRST_NAME_ATTRIBUTE);
-        String author_last_name = request.getParameter(AUTHOR_LAST_NAME_ATTRIBUTE);
 
         ServiceFactory serviceFactory = ServiceFactory.getFactory();
         Service service = serviceFactory.getService(ServiceFactory.ServiceType.ADD_BOOK_AUTHOR);
