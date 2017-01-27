@@ -5,7 +5,6 @@
 <head>
   <title></title>
   <link rel="stylesheet" type="text/css" href="styles/bookInfoStyle.css">
-  <style><%@include file="styles/bookInfoStyle.css"%></style>
 
 </head>
 <body>

@@ -5,7 +5,7 @@
 <html>
 <head>
   <title></title>
-  <style><%@include file="styles/mainPageStyle.css"%></style>
+  <link rel="stylesheet" type="text/css" href="styles/mainPageStyle.css">
 </head>
 
 <body>

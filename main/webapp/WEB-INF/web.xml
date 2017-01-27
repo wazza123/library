@@ -23,7 +23,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>controller</servlet-name>
-        <servlet-class>com.epam.application.controller.Controller</servlet-class>
+        <servlet-class>com.epam.library.controller.Controller</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>controller</servlet-name>
@@ -32,7 +32,7 @@
 
     <servlet>
         <servlet-name>uploadController</servlet-name>
-        <servlet-class>com.epam.application.controller.UploadController</servlet-class>
+        <servlet-class>com.epam.library.controller.UploadController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>uploadController</servlet-name>
@@ -41,7 +41,7 @@
 
     <filter>
         <filter-name>filter</filter-name>
-        <filter-class>com.epam.application.controller.AuthorizationFilter</filter-class>
+        <filter-class>com.epam.library.controller.AuthorizationFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>filter</filter-name>

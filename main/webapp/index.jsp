@@ -1,5 +1,5 @@
 <%@ page import="java.util.List" %>
-<%@ page import="com.epam.application.bean.Book" %>
+<%@ page import="com.epam.library.bean.Book" %>
 <%@ page session="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -8,7 +8,7 @@
 <html>
   <head>
     <title></title>
-    <style><%@include file="WEB-INF/styles/mainPageStyle.css"%></style>
+    <link rel="stylesheet" type="text/css" href="styles/mainPageStyle.css">
   </head>
 
 <body>

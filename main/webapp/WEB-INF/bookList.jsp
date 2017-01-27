@@ -4,6 +4,7 @@
 <html>
 <head>
     <title></title>
+    <link rel="stylesheet" type="text/css" href="styles/mainPageStyle.css">
     <style><%@include file="styles/bookListStyle.css"%></style>
 </head>
 <body>

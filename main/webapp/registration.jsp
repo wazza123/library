@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <head>
     <title></title>
-    <script type="text/javascript"><%@include file="WEB-INF/scripts/registrationFormValidation.js"%></script>
+    <script type="text/javascript" src="scripts/registrationFormValidation.js"></script>
 </head>
 <body>
 <form action="controller" method="post">
