@@ -1,0 +1,15 @@
+
+
+ .genres > form{
+
+     margin: 0;
+    display: inline;
+    width: 50%;
+    height: 50%;
+}
+
+.genres input {
+
+     width: 200px;
+     height: 100px;
+ }
