@@ -1,5 +1,5 @@
 <%@ page import="java.util.List" %>
-<%@ page import="com.epam.library.bean.Book" %>
+<%@ page import="com.company.library.bean.Book" %>
 <%@ page session="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>

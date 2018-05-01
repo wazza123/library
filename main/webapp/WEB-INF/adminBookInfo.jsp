@@ -10,7 +10,7 @@
 <body>
 
 <h2><a href="index.jsp">main page</a>  </h2>
-<jsp:useBean id="book_info" class="com.epam.library.bean.Book" scope="request" ></jsp:useBean>
+<jsp:useBean id="book_info" class="com.company.library.bean.Book" scope="request" ></jsp:useBean>
 <img class="book_picture" src="<jsp:getProperty name="book_info" property="bookCoverPath"/>"/>
 <div class="book_title">
   <jsp:getProperty name="book_info" property="name"/>
